@@ -1,20 +1,14 @@
 
 
-let arrayTemperature = [];
-let arrayHumidity = [];
-let arraySkin = [];
-let arrayLuminance = [];
-let arrayHeartRate = [];
+
+let array = [];
 //
-var maxArraySizeTemperature = 65536;
-var maxArraySizeHumidity = 65536;
-var maxArraySizeSkin = 65536;
-var maxArraySizeLuminance = 65536;
-var maxArraySizeHeartRate = 65536;
+
 
 export function getRawDataFromDataBase(url) {
     return fetch(url)
         .then((res) => {
+            array=[]
             return res.json()
         })
         .then((res) => {
@@ -29,7 +23,7 @@ export function getRawDataFromDataBase(url) {
         }).then((jsonArray) => {
             //console.log("returnArray  :"+ arraySkin)
             //return arraySkin
-            return [arraySkin,jsonArray]
+            return [array,jsonArray]
     })
 }
 
@@ -59,50 +53,11 @@ function parseFloat(str) {
     return float * sign;
 }
 
-//Append data on Temperature
-function appendDataOnTemperature(data) {
-    arrayTemperature.push(data);
-    if (arrayTemperature.length >= maxArraySizeTemperature) {
-        console.log("Temperature data array " + arrayTemperature);
-        arrayTemperature = [];
-    }
-}
-
 //Append data on Humidity
-function appendDataOnHumidity(data) {
-    arrayHumidity.push(data);
-    if (arrayHumidity.length >= maxArraySizeHumidity) {
-        console.log("Humidity data array full " + arrayHumidity);
-        arrayHumidity = [];
-    }
+function appendDataOnArray(data) {
+    array.push(data)
 }
 
-//Append data on Skin
-function appendDataOnSkin(data) {
-    arraySkin.push(data);
-    if (arraySkin.length >= maxArraySizeSkin) {
-        //console.log("Skin data array full " + arraySkin);
-        arraySkin = [];
-    }
-}
-
-//Append data on Luminance
-function appendDataOnLuminance(data) {
-    arrayLuminance.push(data);
-    if (arrayLuminance.length >= maxArraySizeLuminance) {
-        console.log("Luminance data array full " + arrayLuminance);
-        arrayLuminance = [];
-    }
-}
-
-//Append data on Heart Rate
-function appendDataOnHeartRate(data) {
-    arrayHeartRate.push(data);
-    if (arrayHeartRate.length >= maxArraySizeHeartRate) {
-        console.log("Heart Rate data array full " + arrayHeartRate);
-        arrayHeartRate = [];
-    }
-}
 
 function getParsedData(jsonObj) {
     var stringToParse = jsonObj.data;
@@ -116,15 +71,15 @@ function getParsedData(jsonObj) {
         console.log("int value : " + parseInt(mySubString, 16));
         */
         if (jsonObj.type === "skin") {
-            appendDataOnSkin(parseInt(mySubString, 16));
+            appendDataOnArray(parseInt(mySubString, 16));
         } else if (jsonObj.type === "heart") {
-            appendDataOnHeartRate(parseInt(mySubString, 16));
+            appendDataOnArray(parseInt(mySubString, 16));
         } else if (jsonObj.type ==="Luminance") {
-            appendDataOnLuminance(parseInt(mySubString, 16));
+            appendDataOnArray(parseInt(mySubString, 16));
         } else if (jsonObj.type === "humidity") {
-            appendDataOnHumidity(parseFloat(mySubString));
+            appendDataOnArray(parseFloat(mySubString));
         } else {
-            appendDataOnTemperature(parseFloat(mySubString));
+            appendDataOnArray(parseFloat(mySubString));
         }
     }
     //console.log("data size : " + array.length);

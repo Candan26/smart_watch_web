@@ -20,10 +20,11 @@ import { AxisScrollbar } from '../js/AxisScrollbar';
 
 let that
 let flex
+let dataChar=[]
 export  default {
   data: function () {
     return {
-      data: getDataTest(300,2000,2)
+      data: getDataTest(dataChar,2000,2)
     }
   },
   mounted() {
@@ -43,8 +44,9 @@ export  default {
       });
       console.error(axisYScrollbar)
     },
-    updateChart:(dc,year,mounth) =>{
-      that.data=getDataTest(dc,year,mounth)
+    updateChart:(dataForChart,year,mounth) =>{
+      dataChar=dataForChart
+      that.data=getDataTest(dataChar,year,mounth)
       //console.log("DC " + dc )
       //console.log(that.data )
     }

@@ -6,28 +6,22 @@
     <!-- <search v-on:SearchRequested="handleSearch"></search>-->
     <!--<Preview :gifs=gifs></Preview> -->
     <!--<PieChartTest></PieChartTest> -->
+<div>  <VueChart></VueChart>  </div>
+<div> <VueTable></VueTable></div>
 
- <VueChart></VueChart>
- <VueTable></VueTable>
 
 </div>
 </template>
 
 <script>
-//import Search from './components/Search'
-//import Preview from "@/components/Preview";
 import VueChart from "@/components/VueChart";
 import VueTable from './components/VueTable';
-//import PieChartTest from './components/PieChartTest';
+
 export default {
 name: 'App',
 components: {
- //PieChartTest,
  VueTable,
  VueChart
- //Search
- //,
- //Preview
 },
 data() {
  return {
@@ -46,24 +40,12 @@ methods: {
          return res.json()
        })
        .then((res) => {
-         //console.log(res);
          this.gifs = res.data;
          this.isLoading = false;
        })
  }
 },
 created() {
- /*
- fetch('http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC')
-     .then((res) => {
-       return res.json()
-     })
-     .then((res) => {
-       console.log(res);
-       this.gifs = res.data;
-       this.isLoading=false;
-     })
-  */
 }
 
 }
@@ -76,4 +58,5 @@ font-family: Avenir, Helvetica, Arial, sans-serif;
 -moz-osx-font-smoothing: grayscale;
 
 }
+
 </style>

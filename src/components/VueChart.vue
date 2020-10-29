@@ -16,6 +16,7 @@
 <script>
 import VueOptions from "@/components/VueOptions";
 import PieChartTest from '@/components/PieChartTest';
+import VueTable from "@/components/VueTable";
 
 import Chart from 'chart.js'
 import {getRawDataFromDataBase} from '../js/dao';
@@ -26,6 +27,7 @@ const urlEnvironment = `http://127.0.0.1:7547/api/environment?page=1`;
 const urlHeartRate = `http://127.0.0.1:7547/api/heart`;
 let that
 let pieMap= new Map();
+let parsedData
 let data = {
   datasets: [{
     data: [72, 72, 72, 72, 72],
@@ -81,7 +83,7 @@ export default {
 
           var url = label + "&value=" + value;
           console.log(url);
-          that.fillData();
+
           let labelLineChart = document.getElementById("myLineChartH2");
           //console.log("VueOptions.data().time"+VueOptions.data().range  )
           labelLineChart.textContent = label + " DATA"
@@ -91,17 +93,13 @@ export default {
 
           //getRawDataFromDataBase(pieMap.get(idx)).then(result => console.log("raw data " + result));
           getRawDataFromDataBase(pieMap.get(idx)).then((res) => {
-            let parsedData = res[0]
+            parsedData = res[0]
             let dataBaseObj = res[1]
-            console.log("dataBaseObj : "+dataBaseObj[0].id)
-            console.log("dataBaseObj : "+dataBaseObj[0].type)
-            console.log("dataBaseObj : "+dataBaseObj[0].data)
-            console.log("dataBaseObj : "+dataBaseObj[0].date)
-            console.log("dataBaseObj : "+dataBaseObj[0].person)
-
             console.log("parsedData  : "+ parsedData)
-
+            VueTable.methods.updateTable(dataBaseObj)
+            that.fillDataLineChart(parsedData);
           });
+          //that.fillDataLineChart(parsedData);
         }
       };
     },
@@ -119,8 +117,8 @@ export default {
       }
     }
     ,
-    fillData() {
-      PieChartTest.methods.updateChart(this.getRandomInt(), 2010, 3)
+    fillDataLineChart(parsedData) {
+      PieChartTest.methods.updateChart(parsedData, 2010, 3)
     }
     ,
     getRandomInt() {

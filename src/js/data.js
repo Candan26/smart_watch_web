@@ -11,14 +11,14 @@ export function getData() {
     return data;
 }
 
-export function getDataTest(dc, year, mounth) {
-    let dataCount = dc;
+export function getDataTest(dataForChart, year, mounth) {
+    let dataCount = dataForChart.length;
     let data = [];
-    for (var i = 0; i < dataCount; i++) {
-        var mod = Math.floor(i / 10) % 10;
+    for (let i = 0; i < dataCount; i++) {
+        //let mod = Math.floor(i / 10) % 10;
         data.push({
             date: new Date(year, mounth, i),
-            yval: mod == 0 ? null : Math.random() * 100
+            yval: dataForChart[i] * 10
         });
     }
     return data;
