@@ -16,11 +16,19 @@
 
 import DatePicker from 'vue2-datepicker';
 import 'vue2-datepicker/index.css';
-
+let that;
 export default {
   name: 'Date',
   components: {
     DatePicker
+  },methods:{
+    getTimePicker(){
+      //console.log(that)
+      return that.data.range
+
+    }
+  },mounted() {
+    that =this
   },
   data() {
     return {
@@ -36,8 +44,10 @@ export default {
       shortcuts: [
         {
           text: 'Today',
-          onclick: () => {
+          onClick: () => {
             this.range = [new Date(), new Date()]
+            console.log("range : " + this.range)
+            //return this.range
           }
         }
       ]

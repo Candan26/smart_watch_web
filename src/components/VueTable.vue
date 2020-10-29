@@ -9,25 +9,28 @@ export default {
   data() {
     return {
       items: [
-        {age: 40, first_name: 'Dickerson', last_name: 'Macdonald'},
-        {age: 21, first_name: 'Larsen', last_name: 'Shaw'},
+        {id: 40, type: 'Dickerson', data: 'Macdonald', date:'2020', person:'cagri'},
+        {id: 21, type: 'Larsen', data: 'Shaw', date:'2020', person:'cagri'},
         {
-          age: 89,
-          first_name: 'Geneva',
-          last_name: 'Wilson',
+          id: 89,
+          type: 'Geneva',
+          data: 'Wilson',
+          date:'2020', person:'cagri',
           _rowVariant: 'danger'
         },
         {
-          age: 40,
-          first_name: 'Thor',
-          last_name: 'MacDonald',
-          _cellVariants: {age: 'info', first_name: 'warning'}
+          id: 40,
+          type: 'Thor',
+          data: 'MacDonald',
+          date:'2020', person:'cagri',
+          _cellVariants: {id: 'info', type: 'info', data : 'info', date: 'info',person:'info'}
         },
         {
-          age: 29,
-          first_name: 'Dick',
-          last_name: 'Dunlap',
-          _cellVariants: {age:'warning', first_name:'info'}
+          id: 29,
+          type: 'Dick',
+          data: 'Dunlap',
+          date:'2020', person:'cagri',
+          _cellVariants: {id:'warning',  type: 'warning', data : 'warning', date: 'warning',person:'warning'}
         }
       ]
     }

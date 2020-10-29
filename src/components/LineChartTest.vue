@@ -6,47 +6,39 @@
         <wj-flex-chart-axis wjProperty="axisX" :axisLine="false"></wj-flex-chart-axis>
         <wj-flex-chart-series name="Data" binding="yval"></wj-flex-chart-series>
       </wj-flex-chart>
+
     </div>
   </div>
 </template>
 
 <script>
 import "@grapecity/wijmo.styles/wijmo.css";
-
+import 'bootstrap.css';
 import '@grapecity/wijmo.vue2.core';
 import '@grapecity/wijmo.vue2.chart';
-import { getDataTest } from '../js/data';
+import { getData } from '../js/data';
 import { AxisScrollbar } from '../js/AxisScrollbar';
 
-let that
-let flex
 export  default {
   data: function () {
     return {
-      data: getDataTest(300,2000,2)
+      data: getData()
     }
   },
   mounted() {
-    that = this
-    this.initializeChart(flex)
-
+    this.initializeChart()
   },
   methods: {
     initializeChart: function(flex) {
       let axisXScrollbar = new AxisScrollbar(flex.axisX, {
         minScale: 0.02
       });
-      console.error(axisXScrollbar)
+      console.log(axisXScrollbar)
       let axisYScrollbar = new AxisScrollbar(flex.axisY, {
         buttonsVisible: false,
         minScale: 0.05
       });
-      console.error(axisYScrollbar)
-    },
-    updateChart:(dc,year,mounth) =>{
-      that.data=getDataTest(dc,year,mounth)
-      //console.log("DC " + dc )
-      //console.log(that.data )
+      console.log(axisYScrollbar)
     }
   }
 }
@@ -55,15 +47,15 @@ export  default {
 
 <style>
 body {
-  margin-bottom: 44px;
+  margin-bottom: 24px;
 }
 
 label {
   margin-right: 3px;
 }
- wj-flexchart {
-  margin: 10px;
-  padding: 10px;
+.form-group .wj-flexchart {
+  margin: 0px;
+  padding: 0px;
   border-bottom: 0px;
   touch-action: none;
   -ms-touch-action: none;
@@ -71,11 +63,11 @@ label {
 }
 
 /****  Axis Scrollbar Css *****/
-.wj-flexchart  .wj-axis-scrollbar-container {
+.form-group .wj-flexchart .wj-axis-scrollbar-container {
   position: relative;
 }
 
-.wj-flexchart .wj-axis-scrollbar-container .wj-chart-rangeslider {
+.form-group .wj-flexchart .wj-axis-scrollbar-container .wj-chart-rangeslider {
   border: 1px solid #EAEAEA;
   background-color: #EAEAEA;
   border-bottom-left-radius: 6px;
@@ -83,11 +75,11 @@ label {
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
 }
-.wj-flexchart .wj-axis-scrollbar-container .wj-chart-hrangeslider {
+.form-group .wj-flexchart .wj-axis-scrollbar-container .wj-chart-hrangeslider {
   height: 20px;
 }
 
-.wj-flexchart .wj-axis-scrollbar-container .wj-chart-vrangeslider {
+.form-group .wj-flexchart .wj-axis-scrollbar-container .wj-chart-vrangeslider {
   width: 20px;
 }
 

@@ -5,9 +5,11 @@
     <!-- <search></search> -->
     <!-- <search v-on:SearchRequested="handleSearch"></search>-->
     <!--<Preview :gifs=gifs></Preview> -->
-    <!--<PieChartTest></PieChartTest>-->
-  <VueChart></VueChart>
-  <VueTable></VueTable>
+    <!--<PieChartTest></PieChartTest> -->
+
+ <VueChart></VueChart>
+ <VueTable></VueTable>
+
 </div>
 </template>
 
@@ -20,48 +22,48 @@ import VueTable from './components/VueTable';
 export default {
 name: 'App',
 components: {
-  //PieChartTest,
-  VueTable,
-  VueChart
-  //Search
-  //,
-  //Preview
+ //PieChartTest,
+ VueTable,
+ VueChart
+ //Search
+ //,
+ //Preview
 },
 data() {
-  return {
-    isLoading: true,
-    gifs: []
-  }
+ return {
+   isLoading: true,
+   gifs: []
+ }
 },
 methods: {
 
-  handleSearch(query) {
-    this.gifs = [];
-    this.isLoading = true;
+ handleSearch(query) {
+   this.gifs = [];
+   this.isLoading = true;
 
-    fetch(`http://api.giphy.com/v1/gifs/search?q=${query}&api_key=dc6zaTOxFJmzC`)
-        .then((res) => {
-          return res.json()
-        })
-        .then((res) => {
-          console.log(res);
-          this.gifs = res.data;
-          this.isLoading = false;
-        })
-  }
+   fetch(`http://api.giphy.com/v1/gifs/search?q=${query}&api_key=dc6zaTOxFJmzC`)
+       .then((res) => {
+         return res.json()
+       })
+       .then((res) => {
+         //console.log(res);
+         this.gifs = res.data;
+         this.isLoading = false;
+       })
+ }
 },
 created() {
-  /*
-  fetch('http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC')
-      .then((res) => {
-        return res.json()
-      })
-      .then((res) => {
-        console.log(res);
-        this.gifs = res.data;
-        this.isLoading=false;
-      })
-   */
+ /*
+ fetch('http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC')
+     .then((res) => {
+       return res.json()
+     })
+     .then((res) => {
+       console.log(res);
+       this.gifs = res.data;
+       this.isLoading=false;
+     })
+  */
 }
 
 }

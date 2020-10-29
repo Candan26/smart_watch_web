@@ -4,8 +4,14 @@ import BootstrapVue  from "bootstrap-vue";
 import IconsPlugin  from "bootstrap-vue";
 import VueApexCharts from 'vue-apexcharts'
 
+
+import '@grapecity/wijmo.vue2.grid';
+import '@grapecity/wijmo.styles/wijmo.css';
+
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+import 'bootstrap'
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
