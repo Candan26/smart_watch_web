@@ -136,7 +136,8 @@ export class AxisScrollbar {
     }
     _refresh() {
         var chartHostEle = this._chart.hostElement, rangeSlider = this._rangeSlider, pa, pOffset, plotBox, axisRect = this._axis._axrect, axisEle, axisOffset, isBottom, isLeft, rsWidth, rOffset = core.getElementRect(this._slbarContainer);
-       console.error(axisRect)
+        window.events.emit("refresh")
+        console.log(axisRect)
 
         if (rangeSlider._isSliding) {
             return;

@@ -1,5 +1,6 @@
 export function getData() {
-    let dataCount = 3000;
+    let dataCount = 30;
+    console.log("getData pressed ")
     let data = [];
     for (var i = 0; i < dataCount; i++) {
         var mod = Math.floor(i / 10) % 10;

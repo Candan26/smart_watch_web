@@ -2,9 +2,9 @@
 
   <div >
     <div >
-      <wj-flex-chart tooltipContent="" :itemsSource="data" chartType="Line" bindingX="date" plotMargin="NaN NaN NaN 80" :initialized="initializeChart">
-        <wj-flex-chart-axis wjProperty="axisX" :axisLine="false"></wj-flex-chart-axis>
-        <wj-flex-chart-series name="Data" binding="yval"></wj-flex-chart-series>
+      <wj-flex-chart  tooltipContent="" :itemsSource="data" chartType="Line" bindingX="date" plotMargin="NaN NaN NaN 80" :initialized="initializeChart">
+        <wj-flex-chart-axis  wjProperty="axisX" :axisLine="false"></wj-flex-chart-axis>
+        <wj-flex-chart-series  name="Data" binding="yval"></wj-flex-chart-series>
       </wj-flex-chart>
     </div>
   </div>
@@ -18,37 +18,41 @@ import '@grapecity/wijmo.vue2.chart';
 import { getDataTest } from '../js/data';
 import { AxisScrollbar } from '../js/AxisScrollbar';
 
-let that
-let flex
-let dataChar=[]
+//let that
+//let flex
+//let dataChar=[]
 export  default {
   data: function () {
     return {
-      data: getDataTest(dataChar,2000,2)
+      dataChar :[],
+      renderCount:0,
+      data: getDataTest(window.dataCharStatic || [],2000,2)
     }
   },
   mounted() {
-    that = this
-    this.initializeChart(flex)
+    //that = this
+    window.events.on('updateChar',({dataChar,year,mounth})=>{
+       this.data=getDataTest(dataChar,year,mounth);
+        window.dataCharStatic=dataChar
+    });
+    window.events.on('refresh', ()=>{
+      console.log("refresh pressed")
+
+    }
+    )
 
   },
   methods: {
     initializeChart: function(flex) {
-      let axisXScrollbar = new AxisScrollbar(flex.axisX, {
+      new AxisScrollbar(flex.axisX, {
         minScale: 0.02
       });
-      console.error(axisXScrollbar)
-      let axisYScrollbar = new AxisScrollbar(flex.axisY, {
+
+      new AxisScrollbar(flex.axisY, {
         buttonsVisible: false,
         minScale: 0.05
       });
-      console.error(axisYScrollbar)
-    },
-    updateChart:(dataForChart,year,mounth) =>{
-      dataChar=dataForChart
-      that.data=getDataTest(dataChar,year,mounth)
-      //console.log("DC " + dc )
-      //console.log(that.data )
+
     }
   }
 }

@@ -16,7 +16,8 @@
 <script>
 import VueChart from "@/components/VueChart";
 import VueTable from './components/VueTable';
-
+import Emitter from 'event-emitter';
+window.events = new Emitter();
 export default {
 name: 'App',
 components: {

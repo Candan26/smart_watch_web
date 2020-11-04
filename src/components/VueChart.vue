@@ -25,7 +25,7 @@ import {getRawDataFromDataBase} from '../js/dao';
 const urlSkin = `http://127.0.0.1:7547/api/skin`;
 const urlEnvironment = `http://127.0.0.1:7547/api/environment?page=1`;
 const urlHeartRate = `http://127.0.0.1:7547/api/heart`;
-let that
+//let that
 let pieMap= new Map();
 let parsedData
 let data = {
@@ -46,7 +46,7 @@ let data = {
     "TEMPERATURE",
     "MOISTURE"
   ]
-};
+}
 
 export default {
   components: {
@@ -57,9 +57,9 @@ export default {
     return {}
   },
   mounted() {
-    that = this;
+    //that = this;
     this.createPieChart()
-    this.fillData()
+    //this.fillData()
   },
 
   methods: {
@@ -96,8 +96,9 @@ export default {
             parsedData = res[0]
             let dataBaseObj = res[1]
             console.log("parsedData  : "+ parsedData)
+            window.dataChar = parsedData;
             VueTable.methods.updateTable(dataBaseObj)
-            that.fillDataLineChart(parsedData);
+            fillDataLineChart(parsedData);
           });
           //that.fillDataLineChart(parsedData);
         }
@@ -117,30 +118,33 @@ export default {
       }
     }
     ,
-    fillDataLineChart(parsedData) {
-      PieChartTest.methods.updateChart(parsedData, 2010, 3)
+
+  }
+}
+ function fillDataLineChart(dataChar) {
+  window.events.emit('updateChar',{dataChar,year:2010,mounth:3});
+     // PieChartTest.methods.updateChart( 2010, 3)
     }
-    ,
-    getRandomInt() {
+/*
+function  getRandomInt() {
       return Math.floor(Math.random() * (1000 - 5 + 1)) + 5
-    },
-    getRandomArray(size) {
+    }
+function   getRandomArray(size) {
       var i;
       var array = [];
       for (i = 0; i < size; i++)
         array[i] = this.getRandomInt();
       //console.log(array)
       return array;
-    },
-    getOrganizedArray(size) {
+    }
+function  getOrganizedArray(size) {
       var i;
       var array = [];
       for (i = 0; i < size; i++)
         array[i] = i;
       return array;
     }
-  }
-}
+    */
 </script>
 
 <style>
