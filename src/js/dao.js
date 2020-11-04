@@ -12,9 +12,8 @@ export function getRawDataFromDataBase(url) {
             return res.json()
         })
         .then((res) => {
-            console.log(res);
             let jsonArrayString = JSON.stringify(res);
-            let jsonArray = (JSON).parse(jsonArrayString);
+            let jsonArray = JSON.parse(jsonArrayString);
             for (let i = 0; i < jsonArray.length; i++) {
                 //console.log(jsonArray[i]);
                 getParsedData(jsonArray[i])
