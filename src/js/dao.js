@@ -1,10 +1,4 @@
-
-
-
 let array = [];
-//
-
-
 export function getRawDataFromDataBase(url) {
     return fetch(url)
         .then((res) => {
@@ -15,13 +9,10 @@ export function getRawDataFromDataBase(url) {
             let jsonArrayString = JSON.stringify(res);
             let jsonArray = JSON.parse(jsonArrayString);
             for (let i = 0; i < jsonArray.length; i++) {
-                //console.log(jsonArray[i]);
                 getParsedData(jsonArray[i])
                 return jsonArray
             }
         }).then((jsonArray) => {
-            //console.log("returnArray  :"+ arraySkin)
-            //return arraySkin
             return [array,jsonArray]
     })
 }
@@ -57,7 +48,6 @@ function appendDataOnArray(data) {
     array.push(data)
 }
 
-
 function getParsedData(jsonObj) {
     var stringToParse = jsonObj.data;
     //console.log("data size : " + stringToParse.length);
@@ -81,5 +71,4 @@ function getParsedData(jsonObj) {
             appendDataOnArray(parseFloat(mySubString));
         }
     }
-    //console.log("data size : " + array.length);
 }

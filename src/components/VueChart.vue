@@ -2,7 +2,7 @@
   <div class="graph-container">
     <div class="left">
       <h2 id="myLineChartH2">Line chart 1</h2>
-      <PieChartTest id="myChartLine"></PieChartTest>
+      <line-chart id="myChartLine"></line-chart>
     </div>
     <div class="left">
       <canvas id="myChartPie"></canvas>
@@ -15,18 +15,17 @@
 
 <script>
 import VueOptions from "@/components/VueOptions";
-import PieChartTest from '@/components/PieChartTest';
+import LineChart from '@/components/LineChart';
 import VueTable from "@/components/VueTable";
 
 import Chart from 'chart.js'
 import {getRawDataFromDataBase} from '../js/dao';
 
-
 const urlSkin = `http://127.0.0.1:7547/api/skin`;
 const urlEnvironment = `http://127.0.0.1:7547/api/environment?page=1`;
 const urlHeartRate = `http://127.0.0.1:7547/api/heart`;
 //let that
-let pieMap= new Map();
+let pieMap = new Map();
 let parsedData
 let data = {
   datasets: [{
@@ -50,16 +49,14 @@ let data = {
 
 export default {
   components: {
-    PieChartTest,
+    LineChart: LineChart,
     VueOptions,
   },
   data() {
     return {}
   },
   mounted() {
-    //that = this;
     this.createPieChart()
-    //this.fillData()
   },
 
   methods: {
@@ -77,74 +74,34 @@ export default {
         if (activePoints[0]) {
           var chartData = activePoints[0]['_chart'].config.data;
           var idx = activePoints[0]['_index'];
-
           var label = chartData.labels[idx];
           var value = chartData.datasets[0].data[idx];
-
           var url = label + "&value=" + value;
+
           console.log(url);
-
           let labelLineChart = document.getElementById("myLineChartH2");
-          //console.log("VueOptions.data().time"+VueOptions.data().range  )
           labelLineChart.textContent = label + " DATA"
-          pieMap.set(0,urlHeartRate)
-          pieMap.set(1,urlSkin)
-          pieMap.set(2,urlEnvironment)
-
-          //getRawDataFromDataBase(pieMap.get(idx)).then(result => console.log("raw data " + result));
+          pieMap.set(0, urlHeartRate)
+          pieMap.set(1, urlSkin)
+          pieMap.set(2, urlEnvironment)
           getRawDataFromDataBase(pieMap.get(idx)).then((res) => {
             parsedData = res[0]
             let dataBaseObj = res[1]
-            console.log("parsedData  : "+ parsedData)
+            console.log("parsedData  : " + parsedData)
             window.dataChar = parsedData;
             VueTable.methods.updateTable(dataBaseObj)
             fillDataLineChart(parsedData);
           });
-          //that.fillDataLineChart(parsedData);
         }
       };
     },
-    fillFirstGraphData() {
-
-      this.datacollection = {
-        labels: this.getOrganizedArray(this.getRandomInt() % 200),
-        datasets: [
-          {
-            label: 'Data One',
-            backgroundColor: '#f87979',
-            data: this.getRandomArray(200)
-          }
-        ]
-      }
-    }
-    ,
-
   }
 }
- function fillDataLineChart(dataChar) {
-  window.events.emit('updateChar',{dataChar,year:2010,mounth:3});
-     // PieChartTest.methods.updateChart( 2010, 3)
-    }
-/*
-function  getRandomInt() {
-      return Math.floor(Math.random() * (1000 - 5 + 1)) + 5
-    }
-function   getRandomArray(size) {
-      var i;
-      var array = [];
-      for (i = 0; i < size; i++)
-        array[i] = this.getRandomInt();
-      //console.log(array)
-      return array;
-    }
-function  getOrganizedArray(size) {
-      var i;
-      var array = [];
-      for (i = 0; i < size; i++)
-        array[i] = i;
-      return array;
-    }
-    */
+
+function fillDataLineChart(dataChar) {
+  window.events.emit('updateChar', {dataChar, year: 2010, mounth: 3});
+}
+
 </script>
 
 <style>

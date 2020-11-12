@@ -23,9 +23,7 @@ export default {
     DatePicker
   },methods:{
     getTimePicker(){
-      //console.log(that)
       return that.data.range
-
     }
   },mounted() {
     that =this

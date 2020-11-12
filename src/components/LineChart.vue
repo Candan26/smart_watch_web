@@ -27,9 +27,6 @@ import "@grapecity/wijmo.vue2.chart";
 import {  getDataTest } from "../js/data";
 import { AxisScrollbar } from "../js/AxisScrollbar";
 
-//let that
-//let flex
-//let dataChar=[]
 export default {
   data: function () {
     return {
@@ -39,7 +36,6 @@ export default {
     };
   },
   async mounted() {
-    //that = this
     window.events.on("updateChar", ({ dataChar, year, mounth }) => {
       this.data =  getDataTest(dataChar, year, mounth);
       this.renderCount++;
@@ -47,7 +43,6 @@ export default {
     window.events.on("refresh", () => {
       console.log("refresh pressed");
     });
-
   },
   methods: {
     initializeChart: function (flex) {
